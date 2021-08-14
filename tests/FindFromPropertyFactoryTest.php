@@ -12,6 +12,8 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\NavigationHelper\FindFromProperty;
 
+use AssertionError;
+use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Mezzio\GenericAuthorization\AuthorizationInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
@@ -113,5 +115,39 @@ final class FindFromPropertyFactoryTest extends TestCase
         );
 
         self::assertInstanceOf(FindFromProperty::class, $helper);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testInvocationWithAssertionError(): void
+    {
+        $auth            = $this->createMock(AuthorizationInterface::class);
+        $renderInvisible = true;
+        $role            = 'test-role';
+
+        $options = [
+            'authorization' => $auth,
+            'renderInvisible' => $renderInvisible,
+            'role' => $role,
+        ];
+
+        $container = $this->getMockBuilder(ContainerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $container->expects(self::never())
+            ->method('get');
+        $container->expects(self::never())
+            ->method('has');
+
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionCode(1);
+        $this->expectExceptionMessage('assert($container instanceof ServiceLocatorInterface)');
+
+        ($this->factory)(
+            $container,
+            '',
+            $options
+        );
     }
 }
