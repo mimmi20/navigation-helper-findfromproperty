@@ -45,7 +45,6 @@ final class FindFromPropertyFactory implements FactoryInterface
                 'role' => $options['role'] ?? null,
             ]
         );
-        assert($acceptHelper instanceof AcceptHelperInterface);
 
         return new FindFromProperty(
             $acceptHelper,
