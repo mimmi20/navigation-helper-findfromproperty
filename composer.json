@@ -18,7 +18,7 @@
     "mimmi20/navigation-helper-converttopages": "dev-master"
   },
   "require-dev": {
-    "laminas/laminas-modulemanager": "^2.10.2",
+    "laminas/laminas-modulemanager": "^2.11.0",
     "laminas/laminas-navigation": "^2.11.1",
     "laminas/laminas-permissions-acl": "^2.8.0",
     "laminas/laminas-servicemanager": "^3.7.0",
