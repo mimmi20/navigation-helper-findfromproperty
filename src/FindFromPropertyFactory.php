@@ -46,9 +46,11 @@ final class FindFromPropertyFactory implements FactoryInterface
             ]
         );
 
-        return new FindFromProperty(
-            $acceptHelper,
-            $container->get(ConvertToPagesInterface::class)
-        );
+        $converter = $container->get(ConvertToPagesInterface::class);
+
+        assert($acceptHelper instanceof AcceptHelperInterface);
+        assert($converter instanceof ConvertToPagesInterface);
+
+        return new FindFromProperty($acceptHelper, $converter);
     }
 }

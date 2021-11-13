@@ -13,8 +13,8 @@ parameters:
   checkGenericClassInNonGenericObjectType: false
   checkMissingIterableValueType: false
   treatPhpDocTypesAsCertain: false
-  implicitThrows: false
   exceptions:
+    implicitThrows: false
     checkedExceptionRegexes:
       - '#Exception#'
       - '#Throwable#'
@@ -22,5 +22,5 @@ parameters:
       missingCheckedExceptionInThrows: true
       tooWideThrowType: true
   ignoreErrors:
-    - '~is not subtype of Throwable~'
+#    - '~is not subtype of Throwable~'
     - '~Parameter #1 \$mixed of method Mimmi20\\NavigationHelper\\ConvertToPages\\ConvertToPagesInterface::convert\(\) expects array<int\|string, array<string>\|string>\|int\|string\|Traversable, array\|string\|Traversable given~'
