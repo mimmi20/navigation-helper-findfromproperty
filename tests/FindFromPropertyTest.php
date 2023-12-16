@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,14 +12,15 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\NavigationHelper\FindFromProperty;
 
+use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Stdlib\Exception\DomainException;
+use Laminas\Stdlib\Exception\InvalidArgumentException;
 use Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromProperty;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 use function sprintf;
 
@@ -28,7 +29,7 @@ final class FindFromPropertyTest extends TestCase
     /**
      * @throws Exception
      * @throws DomainException
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testFindWrongRelation(): void
     {
@@ -76,8 +77,8 @@ final class FindFromPropertyTest extends TestCase
         $this->expectExceptionMessage(
             sprintf(
                 'Invalid relation attribute "%s", must be "rel" or "rev"',
-                $rel
-            )
+                $rel,
+            ),
         );
         $this->expectExceptionCode(0);
 
@@ -86,9 +87,8 @@ final class FindFromPropertyTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      * @throws DomainException
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testFindNoRelation(): void
     {
@@ -140,9 +140,8 @@ final class FindFromPropertyTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      * @throws DomainException
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testFindNoConvertedRelation(): void
     {
@@ -202,9 +201,8 @@ final class FindFromPropertyTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      * @throws DomainException
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testFindWithConvertedRelation(): void
     {
@@ -256,10 +254,24 @@ final class FindFromPropertyTest extends TestCase
         $acceptHelper = $this->getMockBuilder(AcceptHelperInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $acceptHelper->expects(self::exactly(2))
+        $matcher      = self::exactly(2);
+        $acceptHelper->expects($matcher)
             ->method('accept')
-            ->withConsecutive([$page1], [$page2])
-            ->willReturnOnConsecutiveCalls(false, true);
+            ->willReturnCallback(
+                static function (AbstractPage | PageInterface $page, bool $recursive = true) use ($matcher, $page1, $page2): bool {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertSame($page1, $page),
+                        default => self::assertSame($page2, $page),
+                    };
+
+                    self::assertTrue($recursive);
+
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => false,
+                        default => true,
+                    };
+                },
+            );
 
         $convertToPages = $this->getMockBuilder(ConvertToPagesInterface::class)
             ->disableOriginalConstructor()
@@ -276,9 +288,8 @@ final class FindFromPropertyTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      * @throws DomainException
-     * @throws \Laminas\Stdlib\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testFindWithConvertedRelation2(): void
     {
@@ -330,10 +341,24 @@ final class FindFromPropertyTest extends TestCase
         $acceptHelper = $this->getMockBuilder(AcceptHelperInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $acceptHelper->expects(self::exactly(2))
+        $matcher      = self::exactly(2);
+        $acceptHelper->expects($matcher)
             ->method('accept')
-            ->withConsecutive([$page1], [$page2])
-            ->willReturnOnConsecutiveCalls(false, true);
+            ->willReturnCallback(
+                static function (AbstractPage | PageInterface $page, bool $recursive = true) use ($matcher, $page1, $page2): bool {
+                    match ($matcher->numberOfInvocations()) {
+                        1 => self::assertSame($page1, $page),
+                        default => self::assertSame($page2, $page),
+                    };
+
+                    self::assertTrue($recursive);
+
+                    return match ($matcher->numberOfInvocations()) {
+                        1 => false,
+                        default => true,
+                    };
+                },
+            );
 
         $convertToPages = $this->getMockBuilder(ConvertToPagesInterface::class)
             ->disableOriginalConstructor()

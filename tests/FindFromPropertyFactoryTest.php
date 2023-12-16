@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,19 +15,20 @@ namespace Mimmi20Test\NavigationHelper\FindFromProperty;
 use AssertionError;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
-use Mezzio\GenericAuthorization\AuthorizationInterface;
+use Mimmi20\Mezzio\GenericAuthorization\AuthorizationInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromProperty;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromPropertyFactory;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
+use Psr\Container\ContainerExceptionInterface;
 
 final class FindFromPropertyFactoryTest extends TestCase
 {
     private FindFromPropertyFactory $factory;
 
+    /** @throws void */
     protected function setUp(): void
     {
         $this->factory = new FindFromPropertyFactory();
@@ -35,7 +36,7 @@ final class FindFromPropertyFactoryTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
      */
     public function testInvocationWithoutOptions(): void
     {
@@ -73,7 +74,7 @@ final class FindFromPropertyFactoryTest extends TestCase
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws ContainerExceptionInterface
      */
     public function testInvocationWithOptions(): void
     {
@@ -111,7 +112,7 @@ final class FindFromPropertyFactoryTest extends TestCase
         $helper = ($this->factory)(
             $container,
             '',
-            $options
+            $options,
         );
 
         self::assertInstanceOf(FindFromProperty::class, $helper);
@@ -119,6 +120,7 @@ final class FindFromPropertyFactoryTest extends TestCase
 
     /**
      * @throws Exception
+     * @throws ContainerExceptionInterface
      */
     public function testInvocationWithAssertionError(): void
     {
@@ -147,7 +149,7 @@ final class FindFromPropertyFactoryTest extends TestCase
         ($this->factory)(
             $container,
             '',
-            $options
+            $options,
         );
     }
 }
