@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,14 +24,12 @@ use function sprintf;
 
 final class FindFromProperty implements FindFromPropertyInterface
 {
-    private AcceptHelperInterface $acceptHelper;
-
-    private ConvertToPagesInterface $convertToPages;
-
-    public function __construct(AcceptHelperInterface $acceptHelper, ConvertToPagesInterface $convertToPages)
-    {
-        $this->acceptHelper   = $acceptHelper;
-        $this->convertToPages = $convertToPages;
+    /** @throws void */
+    public function __construct(
+        private readonly AcceptHelperInterface $acceptHelper,
+        private readonly ConvertToPagesInterface $convertToPages,
+    ) {
+        // nothing to do
     }
 
     /**
@@ -42,28 +40,23 @@ final class FindFromProperty implements FindFromPropertyInterface
      * @param string                     $rel  relation, 'rel' or 'rev'
      * @param string                     $type link type, e.g. 'start', 'next'
      *
-     * @return array<(PageInterface|AbstractPage)>
+     * @return array<(AbstractPage|PageInterface)>
      *
      * @throws DomainException
      * @throws InvalidArgumentException
      */
-    public function find($page, string $rel, string $type): array
+    public function find(AbstractPage | PageInterface $page, string $rel, string $type): array
     {
-        switch ($rel) {
-            case 'rel':
-                $result = $page->getRel($type);
-                break;
-            case 'rev':
-                $result = $page->getRev($type);
-                break;
-            default:
-                throw new DomainException(
-                    sprintf(
-                        'Invalid relation attribute "%s", must be "rel" or "rev"',
-                        $rel
-                    )
-                );
-        }
+        $result = match ($rel) {
+            'rel' => $page->getRel($type),
+            'rev' => $page->getRev($type),
+            default => throw new DomainException(
+                sprintf(
+                    'Invalid relation attribute "%s", must be "rel" or "rev"',
+                    $rel,
+                ),
+            ),
+        };
 
         if (!$result) {
             return [];
@@ -71,16 +64,14 @@ final class FindFromProperty implements FindFromPropertyInterface
 
         $result = $this->convertToPages->convert($result);
 
-        if ([] === $result) {
+        if ($result === []) {
             return [];
         }
 
         return array_filter(
             $result,
-            /*
-             * @param PageInterface|AbstractPage $page
-             */
-            fn ($page): bool => $this->acceptHelper->accept($page)
+            /** @param AbstractPage|PageInterface $page */
+            fn ($page): bool => $this->acceptHelper->accept($page),
         );
     }
 }

@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,10 +27,10 @@ interface FindFromPropertyInterface
      * @param string                     $rel  relation, 'rel' or 'rev'
      * @param string                     $type link type, e.g. 'start', 'next'
      *
-     * @return array<(PageInterface|AbstractPage)>
+     * @return array<(AbstractPage|PageInterface)>
      *
      * @throws DomainException
      * @throws InvalidArgumentException
      */
-    public function find($page, string $rel, string $type): array;
+    public function find(AbstractPage | PageInterface $page, string $rel, string $type): array;
 }

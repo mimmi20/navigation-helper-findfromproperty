@@ -7,15 +7,15 @@
 ## Code Status
 
 [![codecov](https://codecov.io/gh/mimmi20/navigation-helper-findfromproperty/branch/master/graph/badge.svg)](https://codecov.io/gh/mimmi20/navigation-helper-findfromproperty)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mimmi20/navigation-helper-findfromproperty.svg)](http://isitmaintained.com/project/mimmi20/navigation-helper-findfromproperty "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/mimmi20/navigation-helper-findfromproperty.svg)](http://isitmaintained.com/project/mimmi20/navigation-helper-findfromproperty "Percentage of issues still open")
+[![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/mimmi20/navigation-helper-findfromproperty.svg)](https://isitmaintained.com/project/mimmi20/navigation-helper-findfromproperty "Average time to resolve an issue")
+[![Percentage of issues still open](https://isitmaintained.com/badge/open/mimmi20/navigation-helper-findfromproperty.svg)](https://isitmaintained.com/project/mimmi20/navigation-helper-findfromproperty "Percentage of issues still open")
 
 ## Installation
 
 Run
 
-```
-$ composer require mimmi20/navigation-helper-findfromproperty
+```shell
+composer require mimmi20/navigation-helper-findfromproperty
 ```
 
 ## License
