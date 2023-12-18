@@ -23,7 +23,9 @@ use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 
 use function array_filter;
 use function assert;
+use function get_debug_type;
 use function is_iterable;
+use function is_string;
 use function sprintf;
 
 final class FindFromProperty implements FindFromPropertyInterface
@@ -67,9 +69,11 @@ final class FindFromProperty implements FindFromPropertyInterface
         }
 
         assert(
-            is_iterable(
-                $result,
-            ) || $result instanceof AbstractContainer || $result instanceof ContainerInterface,
+            is_iterable($result)
+            || is_string($result)
+            || $result instanceof AbstractContainer
+            || $result instanceof ContainerInterface,
+            get_debug_type($result),
         );
 
         $result = $this->convertToPages->convert($result);
