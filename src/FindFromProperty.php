@@ -12,14 +12,18 @@ declare(strict_types = 1);
 
 namespace Mimmi20\NavigationHelper\FindFromProperty;
 
+use Laminas\Navigation\AbstractContainer;
 use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Stdlib\Exception\DomainException;
 use Laminas\Stdlib\Exception\InvalidArgumentException;
-use Mezzio\Navigation\Page\PageInterface;
+use Mimmi20\Mezzio\Navigation\ContainerInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 
 use function array_filter;
+use function assert;
+use function is_iterable;
 use function sprintf;
 
 final class FindFromProperty implements FindFromPropertyInterface
@@ -61,6 +65,12 @@ final class FindFromProperty implements FindFromPropertyInterface
         if (!$result) {
             return [];
         }
+
+        assert(
+            is_iterable(
+                $result,
+            ) || $result instanceof AbstractContainer || $result instanceof ContainerInterface,
+        );
 
         $result = $this->convertToPages->convert($result);
 

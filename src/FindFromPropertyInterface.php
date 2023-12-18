@@ -15,7 +15,7 @@ namespace Mimmi20\NavigationHelper\FindFromProperty;
 use Laminas\Navigation\Page\AbstractPage;
 use Laminas\Stdlib\Exception\DomainException;
 use Laminas\Stdlib\Exception\InvalidArgumentException;
-use Mezzio\Navigation\Page\PageInterface;
+use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 
 interface FindFromPropertyInterface
 {
