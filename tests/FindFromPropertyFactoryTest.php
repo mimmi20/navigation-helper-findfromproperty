@@ -13,7 +13,6 @@ declare(strict_types = 1);
 namespace Mimmi20Test\NavigationHelper\FindFromProperty;
 
 use AssertionError;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Mimmi20\Mezzio\GenericAuthorization\AuthorizationInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
@@ -23,6 +22,7 @@ use Mimmi20\NavigationHelper\FindFromProperty\FindFromPropertyFactory;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 
 final class FindFromPropertyFactoryTest extends TestCase
 {
