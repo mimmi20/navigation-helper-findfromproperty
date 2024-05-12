@@ -84,8 +84,8 @@ final class FindFromProperty implements FindFromPropertyInterface
 
         return array_filter(
             $result,
-            /** @param AbstractPage|PageInterface $page */
-            fn ($page): bool => $this->acceptHelper->accept($page),
+            /** @throws void */
+            fn (AbstractPage | PageInterface $page): bool => $this->acceptHelper->accept($page),
         );
     }
 }
