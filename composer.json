@@ -23,7 +23,7 @@
     "psr/container": "^1.1.2 || ^2.0.2"
   },
   "require-dev": {
-    "infection/infection": "^0.27.11",
+    "infection/infection": "^0.27.11 || ^0.28.1 || ^0.29.0",
     "laminas/laminas-modulemanager": "^2.15.0",
     "laminas/laminas-navigation": "^2.19.1",
     "laminas/laminas-permissions-acl": "^2.16.0",
@@ -61,15 +61,14 @@
     }
   },
   "config": {
-    "preferred-install": "dist",
-    "lock": false,
-    "sort-packages": true,
     "allow-plugins": {
-      "laminas/laminas-dependency-plugin": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true,
-      "infection/extension-installer": true
-    }
+      "infection/extension-installer": true,
+      "phpstan/extension-installer": true
+    },
+    "lock": false,
+    "preferred-install": "dist",
+    "sort-packages": true
   },
   "extra": {
     "laminas": {
