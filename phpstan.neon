@@ -134,7 +134,7 @@ rules:
   - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
   # paths
-  - Symplify\PHPStanRules\Rules\NoReferenceRule # References are required
+  - Symplify\PHPStanRules\Rules\NoReferenceRule
 
   # explicit naming
   - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
