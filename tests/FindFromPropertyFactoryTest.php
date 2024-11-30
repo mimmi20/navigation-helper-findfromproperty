@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
@@ -19,6 +20,7 @@ use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromProperty;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromPropertyFactory;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -29,6 +31,7 @@ final class FindFromPropertyFactoryTest extends TestCase
     private FindFromPropertyFactory $factory;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->factory = new FindFromPropertyFactory();

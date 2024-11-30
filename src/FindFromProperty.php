@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the mimmi20/navigation-helper-findfromproperty package.
  *
@@ -20,6 +21,7 @@ use Mimmi20\Mezzio\Navigation\ContainerInterface;
 use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
+use Override;
 
 use function array_filter;
 use function assert;
@@ -28,12 +30,12 @@ use function is_iterable;
 use function is_string;
 use function sprintf;
 
-final class FindFromProperty implements FindFromPropertyInterface
+final readonly class FindFromProperty implements FindFromPropertyInterface
 {
     /** @throws void */
     public function __construct(
-        private readonly AcceptHelperInterface $acceptHelper,
-        private readonly ConvertToPagesInterface $convertToPages,
+        private AcceptHelperInterface $acceptHelper,
+        private ConvertToPagesInterface $convertToPages,
     ) {
         // nothing to do
     }
@@ -51,6 +53,7 @@ final class FindFromProperty implements FindFromPropertyInterface
      * @throws DomainException
      * @throws InvalidArgumentException
      */
+    #[Override]
     public function find(AbstractPage | PageInterface $page, string $rel, string $type): array
     {
         $result = match ($rel) {
