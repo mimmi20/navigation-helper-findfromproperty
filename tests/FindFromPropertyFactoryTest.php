@@ -46,7 +46,7 @@ final class FindFromPropertyFactoryTest extends TestCase
         $options = [
             'authorization' => null,
             'renderInvisible' => false,
-            'role' => null,
+            'roles' => [],
         ];
 
         $convertToPages = $this->createMock(ConvertToPagesInterface::class);
@@ -83,12 +83,12 @@ final class FindFromPropertyFactoryTest extends TestCase
     {
         $auth            = $this->createMock(AuthorizationInterface::class);
         $renderInvisible = true;
-        $role            = 'test-role';
+        $roles           = ['test-role'];
 
         $options = [
             'authorization' => $auth,
             'renderInvisible' => $renderInvisible,
-            'role' => $role,
+            'roles' => $roles,
         ];
 
         $convertToPages = $this->createMock(ConvertToPagesInterface::class);
@@ -129,12 +129,12 @@ final class FindFromPropertyFactoryTest extends TestCase
     {
         $auth            = $this->createMock(AuthorizationInterface::class);
         $renderInvisible = true;
-        $role            = 'test-role';
+        $roles           = ['test-role'];
 
         $options = [
             'authorization' => $auth,
             'renderInvisible' => $renderInvisible,
-            'role' => $role,
+            'roles' => $roles,
         ];
 
         $container = $this->getMockBuilder(ContainerInterface::class)
