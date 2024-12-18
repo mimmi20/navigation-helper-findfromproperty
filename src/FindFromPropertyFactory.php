@@ -48,7 +48,7 @@ final class FindFromPropertyFactory implements FactoryInterface
             [
                 'authorization' => $options['authorization'] ?? null,
                 'renderInvisible' => $options['renderInvisible'] ?? false,
-                'role' => $options['role'] ?? null,
+                'roles' => $options['roles'] ?? [],
             ],
         );
 
