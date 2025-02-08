@@ -17,6 +17,7 @@
   },
   "require": {
     "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+    "laminas/laminas-servicemanager": "^3.22.1",
     "laminas/laminas-stdlib": "^3.20.0",
     "mimmi20/navigation-helper-acceptpage": "^4.0.1",
     "mimmi20/navigation-helper-converttopages": "^3.0.0",
@@ -27,7 +28,6 @@
     "laminas/laminas-modulemanager": "^2.17.0",
     "laminas/laminas-navigation": "^2.20.0",
     "laminas/laminas-permissions-acl": "^2.17.0",
-    "laminas/laminas-servicemanager": "^3.22.1",
     "mimmi20/coding-standard": "^6.0.10",
     "mimmi20/mezzio-generic-authorization": "^4.0.0",
     "mimmi20/mezzio-navigation": "^4.0.3",
@@ -51,7 +51,6 @@
     "laminas/laminas-config": "to provide page configuration (optional, as arrays and Traversables are also allowed)",
     "laminas/laminas-navigation": "Required to use with Laminas",
     "laminas/laminas-permissions-acl": "Required to use authrization roles or privileges with Laminas",
-    "laminas/laminas-servicemanager": "Required to use the navigation factories",
     "mimmi20/mezzio-generic-authorization": "Required to use authrization roles or privileges with Mezzio",
     "mimmi20/mezzio-navigation": "Required to use with Mezzio"
   },
