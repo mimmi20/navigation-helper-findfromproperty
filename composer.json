@@ -17,9 +17,9 @@
   },
   "require": {
     "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
-    "laminas/laminas-servicemanager": "^3.22.1",
+    "laminas/laminas-servicemanager": "^4.4.0",
     "laminas/laminas-stdlib": "^3.20.0",
-    "mimmi20/navigation-helper-acceptpage": "^4.0.1",
+    "mimmi20/navigation-helper-acceptpage": "^5.0.0",
     "mimmi20/navigation-helper-converttopages": "^3.0.0",
     "psr/container": "^1.1.2 || ^2.0.2"
   },
