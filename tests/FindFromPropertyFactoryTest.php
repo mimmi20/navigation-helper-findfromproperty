@@ -20,7 +20,7 @@ use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromProperty;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromPropertyFactory;
-use Override;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -28,18 +28,11 @@ use Psr\Container\ContainerInterface;
 
 final class FindFromPropertyFactoryTest extends TestCase
 {
-    private FindFromPropertyFactory $factory;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->factory = new FindFromPropertyFactory();
-    }
-
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocationWithoutOptions(): void
     {
@@ -70,7 +63,7 @@ final class FindFromPropertyFactoryTest extends TestCase
             ->with(AcceptHelperInterface::class, $options)
             ->willReturn($acceptHelper);
 
-        $helper = ($this->factory)($container, '');
+        $helper = (new FindFromPropertyFactory())($container, '');
 
         self::assertInstanceOf(FindFromProperty::class, $helper);
     }
@@ -78,6 +71,8 @@ final class FindFromPropertyFactoryTest extends TestCase
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocationWithOptions(): void
     {
@@ -112,7 +107,7 @@ final class FindFromPropertyFactoryTest extends TestCase
             ->with(AcceptHelperInterface::class, $options)
             ->willReturn($acceptHelper);
 
-        $helper = ($this->factory)(
+        $helper = (new FindFromPropertyFactory())(
             $container,
             '',
             $options,
@@ -124,6 +119,8 @@ final class FindFromPropertyFactoryTest extends TestCase
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocationWithAssertionError(): void
     {
@@ -149,7 +146,7 @@ final class FindFromPropertyFactoryTest extends TestCase
         $this->expectExceptionCode(1);
         $this->expectExceptionMessage('assert($container instanceof ServiceLocatorInterface)');
 
-        ($this->factory)(
+        (new FindFromPropertyFactory())(
             $container,
             '',
             $options,
