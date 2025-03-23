@@ -20,6 +20,7 @@ use Mimmi20\Mezzio\Navigation\Page\PageInterface;
 use Mimmi20\NavigationHelper\Accept\AcceptHelperInterface;
 use Mimmi20\NavigationHelper\ConvertToPages\ConvertToPagesInterface;
 use Mimmi20\NavigationHelper\FindFromProperty\FindFromProperty;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -204,6 +205,8 @@ final class FindFromPropertyTest extends TestCase
      * @throws Exception
      * @throws DomainException
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testFindWithConvertedRelation(): void
     {
@@ -291,6 +294,8 @@ final class FindFromPropertyTest extends TestCase
      * @throws Exception
      * @throws DomainException
      * @throws InvalidArgumentException
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testFindWithConvertedRelation2(): void
     {
