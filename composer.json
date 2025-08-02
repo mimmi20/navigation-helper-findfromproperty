@@ -1,6 +1,6 @@
 {
   "name": "mimmi20/navigation-helper-findfromproperty",
-  "description": "Provides a find-from-property helper for Laminas- and Mezzio Navigation",
+  "description": "Provides a find-from-property helper for Mezzio Navigation",
   "license": "MIT",
   "type": "library",
   "authors": [
